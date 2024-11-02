@@ -1,28 +1,17 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Services\GoogleService;
 use Illuminate\Support\Facades\Route;
-use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function () {
     return view('login-page');
-});
+})->name("home");
 
-Route::get('/auth/redirect', function () {
-    return Socialite::driver('google')->redirect();
-})->name("login-google");
-
-Route::get('/auth/callback', function () {
-    $googleUser = Socialite::driver('google')->user();
-    $user = User::updateOrCreate([
-        'github_id' => $googleUser->id,
-    ], [
-        'name' => $googleUser->name,
-        'email' => $googleUser->email,
-        'github_token' => $googleUser->token,
-        'github_refresh_token' => $googleUser->refreshToken,
-    ]);
-    $login = Auth::login($user);
-    if ($login) return redirect("/");
+// Auth
+Route::prefix("auth")->group(function () {
+    // Login With Google
+    Route::prefix("google")->controller(GoogleService::class)->group(function () {
+        Route::get("/redirect", "redirect")->name("login-google");
+        Route::get("/callback", "callback")->name("callback-google");
+    });
 });
