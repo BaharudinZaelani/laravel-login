@@ -9,6 +9,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 class GoogleService
 {
+    function __construct(
+        protected Socialite $socialite,
+        protected User $user,
+        protected UserGoogle $userGoogle
+    ) {}
     function redirect()
     {
         return Socialite::driver('google')->redirect();
@@ -16,11 +21,10 @@ class GoogleService
 
     function callback()
     {
-        $googleUser = Socialite::driver('google')->user();
-        dd($googleUser);
+        $googleUser = $this->socialite->driver('google')->user();
 
         // Users Table
-        $user = User::updateOrCreate([
+        $user = $this->user->updateOrCreate([
             'email' => $googleUser->email,
         ], [
             'name' => $googleUser->name,
@@ -28,8 +32,8 @@ class GoogleService
             'google_token' => $googleUser->token,
             'google_refresh_token' => $googleUser->refreshToken,
         ]);
-        UserGoogle::updateOrCreate([
-            "user_id" => $user_id
+        $this->userGoogle->updateOrCreate([
+            "user_id" => $user->id
         ], [
             "avatar" => $googleUser->avatar,
             "avatar_original" => $googleUser->avatar_original,
@@ -40,5 +44,5 @@ class GoogleService
         if ($login) return redirect("/");
     }
 
-    function getToken() {}
+    function getToken(string $userId) {}
 }
