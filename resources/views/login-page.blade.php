@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Bahar Login Cenah</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -115,41 +115,75 @@
             opacity: 8%;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
 
     <div class="container">
-        <div class="d-flex w-100 align-items-center justify-content-center" style="height: 100vh;">
-            @if (Auth::check())
-                <h1 class="display-6">Selamat Datang {{ Auth::user()->name }}</h1>
-            @else
-                <a href="{{ route('login-google') }}" class="btn gsi-material-button">
-                    <div class="gsi-material-button-state"></div>
-                    <div class="gsi-material-button-content-wrapper">
-                        <div class="gsi-material-button-icon">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
-                                <path fill="#EA4335"
-                                    d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
-                                </path>
-                                <path fill="#4285F4"
-                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
-                                </path>
-                                <path fill="#FBBC05"
-                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
-                                </path>
-                                <path fill="#34A853"
-                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
-                                </path>
-                                <path fill="none" d="M0 0h48v48H0z"></path>
-                            </svg>
+        <div style="height: 100vh;" class="row align-items-center justify-content-center">
+            <div class="col-md-5">
+                <div class=" card card-body shadow">
+                    @if (Auth::check())
+                        <h1 class="display-6">Selamat Datang {{ Auth::user()->name }}</h1>
+                    @else
+                        <h4 class="m-auto pb-4">Login Page</h4>
+                        <div class="mb-3">
+                            {{-- email --}}
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="email-input">
+                                    <i class="bi bi-person"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Email" aria-label="Email"
+                                    aria-describedby="email-input">
+                            </div>
+                            {{-- password --}}
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="password-input">
+                                    <i class="bi bi-key"></i>
+                                </span>
+                                <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                                    aria-describedby="password-input">
+                            </div>
+                            {{-- Submit Button --}}
+                            <div class="mb-3">
+                                <button class="text-uppercase btn btn-primary d-flex gap-2 align-items-center">
+                                    <strong>
+                                        <i class="bi bi-box-arrow-in-right"></i>
+                                        <span>Log In</span>
+                                    </strong>
+                                </button>
+                            </div>
                         </div>
-                        <span class="gsi-material-button-contents">Sign in with Google</span>
-                        <span style="display: none;">Sign in with Google</span>
-                    </div>
-                </a>
-            @endif
+                        <div class="mb-2 border-bottom"></div>
+                        <a href="{{ route('login-google') }}" class="btn m-auto gsi-material-button">
+                            <div class="gsi-material-button-state"></div>
+                            <div class="gsi-material-button-content-wrapper">
+                                <div class="gsi-material-button-icon">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                                        <path fill="#EA4335"
+                                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
+                                        </path>
+                                        <path fill="#4285F4"
+                                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
+                                        </path>
+                                        <path fill="#FBBC05"
+                                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
+                                        </path>
+                                        <path fill="#34A853"
+                                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
+                                        </path>
+                                        <path fill="none" d="M0 0h48v48H0z"></path>
+                                    </svg>
+                                </div>
+                                <span class="gsi-material-button-contents">Sign in with Google</span>
+                                <span style="display: none;">Sign in with Google</span>
+                            </div>
+                        </a>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 
